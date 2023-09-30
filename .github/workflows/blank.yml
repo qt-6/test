@@ -9,6 +9,27 @@ jobs:
 
     steps:
       - run: |
+          url=https://github.com/sass/dart-sass/releases/download/1.68.0/dart-sass-1.68.0-linux-x64.tar.gz
+
+          curl -L -o sass.tar.gz "$url"
+          tar -xf sass.tar.gz
+          rm sass.tar.gz
+          
+          using_version=$(dart-sass/sass --version)
+          latest_version=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/sass/dart-sass/releases/latest \
+            | jq -r '.tag_name')
+          if [ "$latest_version" != "$using_version" ]; then
+            echo "::warning title={Using outdated SASS version}::{The most recent SASS version available is $latest_version, but only $using_version is installed. Consider updating the script to use the newest version.}"
+          fi
+      
+      - run: |
+          dart-sass/sass --version
+
+    
+      - run: |
           echo Hello world
           echo "### Details" >> $GITHUB_STEP_SUMMARY
           echo "<details><summary>" >> $GITHUB_STEP_SUMMARY
