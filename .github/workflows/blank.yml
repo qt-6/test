@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - run: |
-          url=https://github.com/sass/dart-sass/releases/download/1.68.0/dart-sass-1.68.0-linux-x64.tar.gz
+          url=https://github.com/sass/dart-sass/releases/download/1.67.0/dart-sass-1.67.0-linux-x64.tar.gz
 
           curl -L -o sass.tar.gz "$url"
           tar -xf sass.tar.gz
