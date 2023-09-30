@@ -22,7 +22,7 @@ jobs:
             https://api.github.com/repos/sass/dart-sass/releases/latest \
             | jq -r '.tag_name')
           if [ "$latest_version" != "$using_version" ]; then
-            echo "::warning title={Using outdated SASS version}::{The most recent SASS version available is $latest_version, but only $using_version is installed. Consider updating the script to use the newest version.}"
+            echo "::warning file=.github/workflows/blank.yml,line=12,title=Using outdated SASS version::The most recent SASS version available is $latest_version, but only $using_version is installed. Consider updating the script to use the newest version."
           fi
       
       - run: |
